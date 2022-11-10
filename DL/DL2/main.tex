@@ -1,0 +1,565 @@
+% -*- coding: utf-8 -*-
+%-------------------------designed by zcf--------------
+\documentclass[UTF8,a4paper,10pt]{ctexart}
+\usepackage[left=3.17cm, right=3.17cm, top=2.74cm, bottom=2.74cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx,subfig}
+\usepackage{float}
+\usepackage{cite}
+\usepackage{caption}
+\usepackage{enumerate}
+\usepackage{booktabs} %表格
+\usepackage{multirow}
+\usepackage{pythonhighlight}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}  %表格强制换行
+%-------------------------字体设置--------------
+\usepackage{times} 
+\newcommand{\yihao}{\fontsize{26pt}{36pt}\selectfont}           % 一号, 1.4 倍行距
+\newcommand{\erhao}{\fontsize{22pt}{28pt}\selectfont}          % 二号, 1.25倍行距
+\newcommand{\xiaoer}{\fontsize{18pt}{18pt}\selectfont}          % 小二, 单倍行距
+\newcommand{\sanhao}{\fontsize{16pt}{24pt}\selectfont}  %三号字
+\newcommand{\xiaosan}{\fontsize{15pt}{22pt}\selectfont}        % 小三, 1.5倍行距
+\newcommand{\sihao}{\fontsize{14pt}{21pt}\selectfont}            % 四号, 1.5 倍行距
+\newcommand{\banxiaosi}{\fontsize{13pt}{19.5pt}\selectfont}    % 半小四, 1.5倍行距
+\newcommand{\xiaosi}{\fontsize{12pt}{18pt}\selectfont}            % 小四, 1.5倍行距
+\newcommand{\dawuhao}{\fontsize{11pt}{11pt}\selectfont}       % 大五号, 单倍行距
+\newcommand{\wuhao}{\fontsize{10.5pt}{15.75pt}\selectfont}    % 五号, 单倍行距
+%-------------------------章节名----------------
+\usepackage{ctexcap} 
+\CTEXsetup[name={,、},number={ \chinese{section}}]{section}
+\CTEXsetup[name={（,）},number={\chinese{subsection}}]{subsection}
+\CTEXsetup[name={,.},number={\arabic{subsubsection}}]{subsubsection}
+%-------------------------页眉页脚--------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\kaishu \leftmark}
+% \chead{}
+\rhead{\kaishu 深度学习及应用作业}%加粗\bfseries 
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.1pt}  
+\renewcommand{\footrulewidth}{0pt}%去掉横线
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}%标题横线
+\newcommand{\HRulegrossa}{\rule{\linewidth}{1.2mm}}
+%-----------------------伪代码------------------
+\usepackage{algorithm}  
+\usepackage{algorithmicx}  
+\usepackage{algpseudocode}  
+\floatname{algorithm}{Algorithm}  
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} 
+\usepackage{lipsum}  
+\makeatletter
+\newenvironment{breakablealgorithm}
+  {% \begin{breakablealgorithm}
+  \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+     \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+      {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+      \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+      \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+      \fi
+      \kern2pt\hrule\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+     \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+  \end{center}
+  }
+\makeatother
+%------------------------代码-------------------
+\usepackage{xcolor} 
+\usepackage{listings} 
+\lstset{ 
+breaklines,%自动换行
+basicstyle=\small,
+escapeinside=``,
+keywordstyle=\color{ blue!70} \bfseries,
+commentstyle=\color{red!50!green!50!blue!50},% 
+stringstyle=\ttfamily,% 
+extendedchars=false,% 
+linewidth=\textwidth,% 
+numbers=left,% 
+numberstyle=\tiny \color{blue!50},% 
+frame=trbl% 
+rulesepcolor= \color{ red!20!green!20!blue!20} 
+}
+%------------超链接----------
+\usepackage[colorlinks,linkcolor=black,anchorcolor=blue]{hyperref}
+%------------------------TODO-------------------
+\usepackage{enumitem,amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+% for check symbol 
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}\hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+%------------------------水印-------------------
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+
+\newcommand{\watermark}[3]{\AddToShipoutPictureBG{
+\parbox[b][\paperheight]{\paperwidth}{
+\vfill%
+\centering%
+\tikz[remember picture, overlay]%
+  \node [rotate = #1, scale = #2] at (current page.center)%
+    {\textcolor{gray!80!cyan!30!magenta!30}{#3}};
+\vfill}}}
+
+
+
+%———————————————————————————————————————————正文———————————————————————————————————————————————
+%----------------------------------------------
+\begin{document}
+\begin{titlepage}
+    \begin{center}
+    \includegraphics[width=0.8\textwidth]{NKU.png}\\[1cm]    
+    \textsc{\Huge \kaishu{\textbf{南\ \ \ \ \ \ 开\ \ \ \ \ \ 大\ \ \ \ \ \ 学}} }\\[0.9cm]
+    \textsc{\huge \kaishu{\textbf{计\ \ 算\ \ 机\ \ 学\ \ 院}}}\\[0.5cm]
+    \textsc{\Large \textbf{深度学习及应用实验作业}}\\[0.8cm]
+    \HRule \\[0.9cm]
+    { \LARGE \bfseries 作业二 \  卷积神经网络实践}\\[0.4cm]
+    \HRule \\[2.0cm]
+    \centering
+    \textsc{\LARGE \kaishu{姓名\ :\ 王泳鑫}}\\[0.5cm]
+    \textsc{\LARGE \kaishu{学号\ :\ 1911479}}\\[0.5cm]
+    \textsc{\LARGE \kaishu{年级\ :\ 2019级}}\\[0.5cm]
+    \textsc{\LARGE \kaishu{专业\ :\ 计算机科学与技术}}\\[0.5cm]
+    \textsc{\LARGE \kaishu{指导教师\ :\ 侯淇彬}}\\[0.5cm]
+    \vfill
+    {\Large \today}
+    \end{center}
+\end{titlepage}
+%-------------摘------要--------------
+\newpage
+\thispagestyle{empty}
+\renewcommand{\abstractname}{\kaishu \sihao \textbf{摘要}}
+    \begin{abstract}
+        本次实验基于老师提供的原始CNN网络结构实现ResNet网络结构和DenseNet网络结构，并实现Cifar10数据集分类。
+        \noindent  %顶格
+        \textbf{\\\ 关键字：卷积神经网络，pytorch，CNN}\textbf{} \\\ \\\
+    \end{abstract}
+%----------------------------------------------------------------
+\tableofcontents
+%----------------------------------------------------------------
+\newpage
+\watermark{60}{10}{NKU}
+\setcounter{page}{1}
+%——————————————————————————————————————
+
+
+\section{实验要求}
+
+\begin{itemize}
+    \item 掌握卷积的基本原理
+    \item 学会使用PyTorch搭建简单的CNN实现Cifar10数据集分类
+    \item 学会使用PyTorch搭建简单的ResNet实现Cifar10数据集分类
+    \item 学会使用PyTorch搭建简单的DenseNet实现Cifar10数据集分类
+\end{itemize}
+
+\section{ResNet实现}
+
+\subsubsection{ResNet18网络结构}
+
+ResNet18网络结构是由残差网络构成，残差网络是由 He 等人提出的。2015年解决图像分类问题。在 ResNets 中，来自初始层的信息通过矩阵加法传递到更深层。此操作没有任何附加参数，因为前一层的输出被添加到前面的层。具有跳跃连接的单个残差块如下所示：
+
+如图\ref{fig:1}所示
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{2.png}
+    \caption{残差块}
+    \label{fig:1}
+\end{figure}
+
+由于 ResNet 的更深层表示，因为来自该网络的预训练权重可用于解决多个任务。它不仅限于图像分类，还可以解决图像分割、关键点检测和对象检测方面的广泛问题。而本次实验我所实现的是ResNet18的网络结构，18代表权重层的数量，网络结构如图\ref{fig:1}所示
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{1.png}
+    \caption{Caption}
+    \label{fig:1}
+\end{figure}
+
+\subsubsection{ResNet18代码}
+
+首先是basicblock残差块的代码：
+
+\begin{python}
+class BasicBlock(nn.Module):
+    expansion = 1
+    
+    def __init__(self, in_channels, out_channels, stride=1):
+        super(BasicBlock, self).__init__()
+        self.features = nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False),
+            nn.BatchNorm2d(out_channels),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(out_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm2d(out_channels)
+        )
+        # 如果输入输出维度不等，则使用1x1卷积层来改变维度
+        self.shortcut = nn.Sequential()
+        if stride != 1 or in_channels != self.expansion * out_channels:
+            self.shortcut = nn.Sequential(
+                nn.Conv2d(in_channels, self.expansion * out_channels, kernel_size=1, stride=stride, bias=False),
+                nn.BatchNorm2d(self.expansion * out_channels),
+            )
+            
+    def forward(self, x):
+        out = self.features(x)
+        out += self.shortcut(x)
+        out = torch.relu(out)
+        return out
+\end{python}
+
+然后是ResNet残差网络的代码实现：
+
+\begin{python}
+class ResNet(nn.Module):
+    def __init__(self, block, num_blocks, num_classes=10):
+        super(ResNet, self).__init__()
+        self.in_channels = 64
+        self.features = nn.Sequential(
+            nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm2d(64),
+            nn.ReLU(inplace=True)
+        )
+        self.layer1 = self._make_layer(block, 64, num_blocks[0], stride=1)
+        self.layer2 = self._make_layer(block, 128, num_blocks[1], stride=2)
+        self.layer3 = self._make_layer(block, 256, num_blocks[2], stride=2)
+        self.layer4 = self._make_layer(block, 512, num_blocks[3], stride=2)
+        # cifar10经过上述结构后，到这里的feature map size是 4 x 4 x 512 x expansion
+        # 所以这里用了 4 x 4 的平均池化
+        self.avg_pool = nn.AvgPool2d(kernel_size=4)
+        self.classifer = nn.Linear(512 * block.expansion, num_classes)
+        
+    def _make_layer(self, block, out_channels, num_blocks, stride):
+        # 第一个block要进行降采样
+        strides = [stride] + [1] * (num_blocks - 1)
+        layers = []
+        for stride in strides:
+            layers.append(block(self.in_channels, out_channels, stride))
+            self.in_channels = out_channels * block.expansion
+        return nn.Sequential(*layers)
+    
+    def forward(self, x):
+        out = self.features(x)
+        out = self.layer1(out)
+        out = self.layer2(out)
+        out = self.layer3(out)
+        out = self.layer4(out)
+        out = self.avg_pool(out)
+        out = out.view(out.size(0), -1)
+        out = self.classifer(out)
+        return out
+\end{python}
+
+网络结构如下所示：
+
+\begin{python}
+    ResNet(
+  (features): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+  )
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (features): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (shortcut): Sequential()
+    )
+    (1): BasicBlock(
+      (features): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (shortcut): Sequential()
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (features): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (shortcut): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (features): Sequential(
+        (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (shortcut): Sequential()
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (features): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (shortcut): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (features): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (shortcut): Sequential()
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (features): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (shortcut): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (features): Sequential(
+        (0): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (shortcut): Sequential()
+    )
+  )
+  (avg_pool): AvgPool2d(kernel_size=4, stride=4, padding=0)
+  (classifer): Linear(in_features=512, out_features=10, bias=True)
+)
+\end{python}
+
+\subsubsection{ResNet18的训练结果}
+
+loss/epochs如图\ref{fig:1}所示
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{5.png}
+    \caption{loss/epochs}
+    \label{fig:1}
+\end{figure}
+
+分类结果如图\ref{fig:1}所示
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{7.png}
+    \caption{分类结果}
+    \label{fig:1}
+\end{figure}
+
+
+
+
+\section{DenseNet实现}
+DenseNet模型，它的基本思路与ResNet一致，但是它建立的是前面所有层与后面层的密集连接（dense connection），它的名称也是由此而来。DenseNet的另一大特色是通过特征在channel上的连接来实现特征重用（feature reuse）。这些特点让DenseNet在参数和计算成本更少的情形下实现比ResNet更优的性能，DenseNet也因此斩获CVPR 2017的最佳论文奖。
+
+
+
+\subsubsection{DenseNet网络结构}
+
+相比ResNet，DenseNet提出了一个更激进的密集连接机制：即互相连接所有的层，具体来说就 是每个层都会接受其前面所有层作为其额外的输入。
+ResNet网络的连接机制，作为对比，如图\ref{fig:1}所示为DenseNet的密集连接机制。可以看到，ResNet是每个层与前面的某层 (一般是2 3层) 短路 连接在一起，连接方式是通过元素级相加。而在DenseNet中，每个层都会与前面所有层在 channel维度上连接（concat) 在一起（这里各个层的特征图大小是相同的，后面会有说明)，并 作为下一层的输入。对于一个 $L$ 层的网络，DenseNet共包含 $\frac{L(L+1)}{2}$ 个连接，相比
+ResNet，这是一种密集连接。而且DenseNet是直接concat来自不同层的特征图，这可以实现特 征重用，提升效率，这一特点是DenseNet与ResNet最主要的区别。
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{4.png}
+    \caption{DenseNet网络结构}
+    \label{fig:1}
+\end{figure}
+
+CNN网络一般要经过Pooling或者stride$>$1的Conv来降低特征图的大小，而DenseNet的密集连接方式需要特征图大小保持一致。为了解决这个问题，DenseNet网络中使用DenseBlock+Transition的结构，其中DenseBlock是包含很多层的模块，每个层的特征图大小相同，层与层之间采用密集连接方式。而Transition模块是连接两个相邻的DenseBlock，并且通过Pooling使特征图大小降低。
+
+
+\subsubsection{DenseNet代码实现}
+
+Transitionm模块的实现如下：
+
+\begin{python}
+class Transition(nn.Module):
+    """
+    改变维数的Transition层
+    先通过1x1的卷积层减少channels，再通过2x2的平均池化层缩小feature-map
+    """
+    def __init__(self, in_channels, out_channels):
+        super(Transition, self).__init__()
+        self.features = nn.Sequential(
+            nn.BatchNorm2d(in_channels),
+            nn.ReLU(True),
+            nn.Conv2d(in_channels, out_channels, kernel_size=1, bias=False),
+            nn.AvgPool2d(2)
+        )
+        
+    def forward(self, x):
+        out = self.features(x)
+        return out
+\end{python}
+
+DenseBlock模块实现如下：
+
+\begin{python}
+class Bottleneck(nn.Module):
+    """
+    Dense Block
+    这里的growth_rate=out_channels, 就是每个Block自己输出的通道数。
+    先通过1x1卷积层，将通道数缩小为4 * growth_rate，然后再通过3x3卷积层降低到growth_rate。
+    """
+    expansion = 4
+    
+    def __init__(self, in_channels, growth_rate):
+        super(Bottleneck, self).__init__()
+        zip_channels = self.expansion * growth_rate
+        self.features = nn.Sequential(
+            nn.BatchNorm2d(in_channels),
+            nn.ReLU(True),
+            nn.Conv2d(in_channels, zip_channels, kernel_size=1, bias=False),
+            nn.BatchNorm2d(zip_channels),
+            nn.ReLU(True),
+            nn.Conv2d(zip_channels, growth_rate, kernel_size=3, padding=1, bias=False)
+        )
+        
+    def forward(self, x):
+        out = self.features(x)
+        out = torch.cat([out, x], 1)
+        return out
+\end{python}
+
+DenseNet网络结构的实现如下：
+
+\begin{python}
+class DenseNet(nn.Module):
+    def __init__(self, num_blocks, growth_rate=12, reduction=0.5, num_classes=10):
+        super(DenseNet, self).__init__()
+        self.growth_rate = growth_rate
+        self.reduction = reduction
+        
+        num_channels = 2 * growth_rate
+        
+        self.features = nn.Conv2d(3, num_channels, kernel_size=3, padding=1, bias=False)
+        self.layer1, num_channels = self._make_dense_layer(num_channels, num_blocks[0])
+        self.layer2, num_channels = self._make_dense_layer(num_channels, num_blocks[1])
+        self.layer3, num_channels = self._make_dense_layer(num_channels, num_blocks[2])
+        self.layer4, num_channels = self._make_dense_layer(num_channels, num_blocks[3], transition=False)
+        self.avg_pool = nn.Sequential(
+            nn.BatchNorm2d(num_channels),
+            nn.ReLU(True),
+            nn.AvgPool2d(4),
+        )
+        self.classifier = nn.Linear(num_channels, num_classes)
+        
+        self._initialize_weight()
+        
+    def _make_dense_layer(self, in_channels, nblock, transition=True):
+        layers = []
+        for i in range(nblock):
+            layers += [Bottleneck(in_channels, self.growth_rate)]
+            in_channels += self.growth_rate
+        out_channels = in_channels
+        if transition:
+            out_channels = int(math.floor(in_channels * self.reduction))
+            layers += [Transition(in_channels, out_channels)]
+        return nn.Sequential(*layers), out_channels
+    
+    def _initialize_weight(self):
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d):
+                nn.init.kaiming_normal_(m.weight.data)
+                if m.bias is not None:
+                    m.bias.data.zero_()
+    
+    def forward(self, x):
+        out = self.features(x)
+        out = self.layer1(out)
+        out = self.layer2(out)
+        out = self.layer3(out)
+        out = self.layer4(out)
+        out = self.avg_pool(out)
+        out = out.view(out.size(0), -1)
+        out = self.classifier(out)
+        return out
+\end{python}
+
+\subsubsection{DenseNet分类结果}
+
+loss/epochs如图\ref{fig:1}所示
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{5.png}
+    \caption{loss/epochs}
+    \label{fig:1}
+\end{figure}
+
+分类结果如图\ref{fig:1}所示
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{6.png}
+    \caption{分类结果}
+    \label{fig:1}
+\end{figure}
+
+
+
+
+\section{解答}
+
+深度神经网络的美妙之处在于它们可以比浅层神经网络更有效地学习复杂的功能。在训练深度神经网络时，模型的性能随着架构深度的增加而下降。这被称为退化问题。
+但是，随着网络深度的增加，模型的性能下降的原因可能是什么？让我们尝试了解退化问题的原因。
+可能的原因之一是过度拟合。随着深度的增加，模型往往会过度拟合，但这里的情况并非如此。
+
+ResNet的作者（He 等人）认为，使用批量归一化和通过归一化正确初始化权重可确保梯度具有合适的标准。实验证明，与浅层网络相比，深层网络会产生较高的训练误差。这表明更深层无法学习甚至恒等映射。
+
+主要原因之一是权重的随机初始化，均值在零、L1 和 L2 正则化附近。结果，模型中的权重总是在零左右，因此更深的层也无法学习恒等映射。
+这里出现了跳跃连接的概念，它使我们能够训练非常深的神经网络。
+
+跳跃连接，会跳跃神经网络中的某些层，并将一层的输出作为下一层的输入。
+引入跳跃连接是为了解决不同架构中的不同问题。在 ResNets 的情况下，跳跃连接解决了我们之前解决的退化问题，而在 DenseNets 的情况下，它确保了特征的可重用性。
+
+
+%----------------------------------------------------------------
+
+%----------------------------------------------------------------
+\bibliographystyle{plain}
+\end{document}

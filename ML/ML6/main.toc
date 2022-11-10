@@ -1,0 +1,7 @@
+\contentsline {section}{\numberline { 一、}实验描述与要求}{1}{section.1}%
+\contentsline {section}{\numberline { 二、}程序设计与代码实现}{1}{section.2}%
+\contentsline {subsection}{\numberline {（一）}ID3算法决策树构建}{1}{subsection.2.1}%
+\contentsline {subsection}{\numberline {（二）}CART决策树构建}{4}{subsection.2.2}%
+\contentsline {section}{\numberline { 三、}测试与结果演示}{5}{section.3}%
+\contentsline {subsection}{\numberline {（一）}ID3决策树}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {（二）}CART决策树}{5}{subsection.3.2}%

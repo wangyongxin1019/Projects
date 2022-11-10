@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline { 一、}实验要求}{1}{section.1}%
+\contentsline {section}{\numberline { 二、}MLP修改过程}{1}{section.2}%
+\contentsline {subsection}{\numberline {（一）}加一层中间层}{1}{subsection.2.1}%
+\contentsline {subsection}{\numberline {（二）}实验结果}{1}{subsection.2.2}%
+\contentsline {subsection}{\numberline {（三）}修改dropout}{2}{subsection.2.3}%
+\contentsline {subsection}{\numberline {（四）}实验结果}{2}{subsection.2.4}%
+\contentsline {subsection}{\numberline {（五）}修改epoch}{2}{subsection.2.5}%
+\contentsline {subsection}{\numberline {（六）}实验结果}{3}{subsection.2.6}%
+\contentsline {section}{\numberline { 三、}实验比对}{3}{section.3}%
